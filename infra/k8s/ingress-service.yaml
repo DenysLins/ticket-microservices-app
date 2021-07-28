@@ -4,16 +4,17 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
+    dev.okteto.com/auto-ingress: "true"
   name: ingress-service
   labels:
     name: ingress-service
 spec:
   rules:
-    - host: tickets.com
+    - host: tickets-denyslins.cloud.okteto.net
       http:
         paths:
           - pathType: Prefix
-            path: "/api/users/currentuser"
+            path: "/api/users/?(.*)"
             backend:
               service:
                 name: auth-clusterip-service

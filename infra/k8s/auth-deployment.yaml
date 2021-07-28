@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: denyslins/auth
+          image: docker.io/denyslins/tickets-auth
           resources:
             limits:
               memory: "128Mi"
