@@ -1,3 +1,4 @@
+import { DatabaseConnectionError } from "./../errors/database-connection-error";
 import express from "express";
 import { body, validationResult } from "express-validator";
 import { RequestValidationError } from "../errors/request-validation-error";
