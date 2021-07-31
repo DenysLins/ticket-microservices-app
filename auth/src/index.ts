@@ -1,5 +1,7 @@
 import express from "express";
 import "express-async-errors";
+import mongoose from "mongoose";
+
 import { currentUserRouter } from "./routes/current-user";
 import { signInRouter } from "./routes/signin";
 import { signOutRouter } from "./routes/signout";
@@ -16,6 +18,24 @@ app.use(signUpRouter);
 
 app.use(errorHandler);
 
-app.listen(3000, () => {
-  console.log("Auth listening on port 3000");
-});
+const start = async () => {
+  try {
+    await mongoose.connect(
+      "mongodb://auth-mongo-clusterip-service:27017/auth",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+      }
+    );
+    console.log("Connected to auth-mongo.");
+  } catch (error) {
+    console.error(error);
+  }
+
+  app.listen(3000, () => {
+    console.log("Auth listening on port 3000.");
+  });
+};
+
+start();
