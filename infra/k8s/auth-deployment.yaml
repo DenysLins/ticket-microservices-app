@@ -15,6 +15,37 @@ spec:
       containers:
         - name: auth
           image: docker.io/denyslins/tickets-auth
+          env:
+            - name: NODE_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-g476m5fh8d
+                  key: NODE_ENV
+            - name: AUTH_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-g476m5fh8d
+                  key: AUTH_PORT
+            - name: COOKIE_KEY_1
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-g476m5fh8d
+                  key: COOKIE_KEY_1
+            - name: COOKIE_KEY_2
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-g476m5fh8d
+                  key: COOKIE_KEY_2
+            - name: AUTH_MONGO_URL
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-g476m5fh8d
+                  key: AUTH_MONGO_URL
+            - name: AUTH_MONGO_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-g476m5fh8d
+                  key: AUTH_MONGO_PORT
           resources:
             limits:
               memory: "128Mi"
