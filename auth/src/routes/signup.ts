@@ -1,9 +1,16 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({ path: "../../.env.local" });
+}
+
 import express from "express";
 import { body, validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
+
 import { BadRequestError } from "../errors/bad-request-error";
 import { RequestValidationError } from "../errors/request-validation-error";
 import { User } from "../models/user";
 
+const JWT_KEY = process.env.JWT_KEY || "jwt_key";
 const router = express.Router();
 
 router.post(
@@ -35,6 +42,18 @@ router.post(
     });
 
     await user.save();
+
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      JWT_KEY
+    );
+
+    req.session = {
+      jwt: userJwt,
+    };
 
     res.status(201).send(user);
   }

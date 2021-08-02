@@ -19,33 +19,38 @@ spec:
             - name: NODE_ENV
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-g476m5fh8d
+                  name: tickets-secret-t5d8kh228h
                   key: NODE_ENV
             - name: AUTH_PORT
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-g476m5fh8d
+                  name: tickets-secret-t5d8kh228h
                   key: AUTH_PORT
             - name: COOKIE_KEY_1
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-g476m5fh8d
+                  name: tickets-secret-t5d8kh228h
                   key: COOKIE_KEY_1
             - name: COOKIE_KEY_2
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-g476m5fh8d
+                  name: tickets-secret-t5d8kh228h
                   key: COOKIE_KEY_2
             - name: AUTH_MONGO_URL
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-g476m5fh8d
+                  name: tickets-secret-t5d8kh228h
                   key: AUTH_MONGO_URL
             - name: AUTH_MONGO_PORT
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-g476m5fh8d
+                  name: tickets-secret-t5d8kh228h
                   key: AUTH_MONGO_PORT
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-t5d8kh228h
+                  key: JWT_KEY
           resources:
             limits:
               memory: "128Mi"

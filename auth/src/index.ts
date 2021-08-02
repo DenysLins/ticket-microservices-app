@@ -9,6 +9,7 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieSession from "cookie-session";
 
+import { healthRouter } from "./routes/health";
 import { currentUserRouter } from "./routes/current-user";
 import { signInRouter } from "./routes/signin";
 import { signOutRouter } from "./routes/signout";
@@ -34,6 +35,7 @@ app.use(
   })
 );
 
+app.use(healthRouter);
 app.use(currentUserRouter);
 app.use(signInRouter);
 app.use(signOutRouter);
