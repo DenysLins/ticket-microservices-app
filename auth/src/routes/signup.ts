@@ -1,6 +1,6 @@
 import express from "express";
 
-import { userAuthValidator, validateRequest } from "../middlewares/validators";
+import { userValidator, validateRequest } from "../middlewares/validators";
 import { BadRequestError } from "../errors/bad-request-error";
 import { generateJwt } from "./../services/jwt";
 import { User } from "../models/user";
@@ -9,10 +9,9 @@ const router = express.Router();
 
 router.post(
   "/api/users/signup",
-  userAuthValidator,
+  userValidator,
+  validateRequest,
   async (req: express.Request, res: express.Response) => {
-    validateRequest(req);
-
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });

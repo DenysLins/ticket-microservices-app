@@ -1,8 +1,8 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 import { RequestValidationError } from "../errors/request-validation-error";
 
-export const userAuthValidator = [
+export const userValidator = [
   body("email")
     .isEmail()
     .isLength({ max: 64 })
@@ -13,9 +13,14 @@ export const userAuthValidator = [
     .withMessage("Password must be between 6 and 16 characters"),
 ];
 
-export const validateRequest = (req: express.Request) => {
+export const validateRequest = (
+  req: express.Request,
+  res: express.Response,
+  next: NextFunction
+) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     throw new RequestValidationError(errors.array());
   }
+  next();
 };

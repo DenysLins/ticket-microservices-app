@@ -1,40 +1,35 @@
 import express from "express";
 
-import { userAuthValidator, validateRequest } from "../middlewares/validators";
+import { userValidator, validateRequest } from "../middlewares/validators";
 import { User } from "../models/user";
 import { Password } from "./../services/password";
 import { generateJwt } from "../services/jwt";
 import { Unauthorized } from "../errors/unauthorized";
-import { NotFound } from "./../errors/not-found";
 
 const router = express.Router();
 
 router.post(
   "/api/users/signin",
-  userAuthValidator,
+  userValidator,
+  validateRequest,
   async (req: express.Request, res: express.Response) => {
-    validateRequest(req);
-
     const { email, password } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const user = await User.findOne({ email });
 
-    if (!existingUser) {
-      throw new NotFound("User email not found");
+    if (!user) {
+      throw new Unauthorized("Invalid credentials");
     }
 
-    const validPassword = await Password.compare(
-      existingUser.password,
-      password
-    );
+    const passwordsMatch = await Password.compare(user.password, password);
 
-    if (!validPassword) {
-      throw new Unauthorized("Wrong Password");
+    if (!passwordsMatch) {
+      throw new Unauthorized("Invalid credentials");
     }
 
-    generateJwt(existingUser, req);
+    generateJwt(user, req);
 
-    res.status(200).send(existingUser);
+    res.status(200).send(user);
   }
 );
 
