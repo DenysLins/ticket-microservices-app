@@ -8,5 +8,5 @@ export const userAuthValidator = [
   body("password")
     .trim()
     .isLength({ min: 6, max: 16 })
-    .withMessage("Password must be between 6 and 20 characters"),
+    .withMessage("Password must be between 6 and 16 characters"),
 ];
