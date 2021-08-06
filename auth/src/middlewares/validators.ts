@@ -1,4 +1,6 @@
-import { body } from "express-validator";
+import express from "express";
+import { body, validationResult } from "express-validator";
+import { RequestValidationError } from "../errors/request-validation-error";
 
 export const userAuthValidator = [
   body("email")
@@ -10,3 +12,10 @@ export const userAuthValidator = [
     .isLength({ min: 6, max: 16 })
     .withMessage("Password must be between 6 and 16 characters"),
 ];
+
+export const validateRequest = (req: express.Request) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw new RequestValidationError(errors.array());
+  }
+};

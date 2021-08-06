@@ -1,27 +1,17 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config({ path: "../../.env.local" });
-}
-
 import express from "express";
-import { validationResult } from "express-validator";
-import jwt from "jsonwebtoken";
 
+import { userAuthValidator, validateRequest } from "../middlewares/validators";
 import { BadRequestError } from "../errors/bad-request-error";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { userAuthValidator } from "../middlewares/validators";
+import { generateJwt } from "./../services/jwt";
 import { User } from "../models/user";
 
-const JWT_KEY = process.env.JWT_KEY || "jwt_key";
 const router = express.Router();
 
 router.post(
   "/api/users/signup",
   userAuthValidator,
   async (req: express.Request, res: express.Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
+    validateRequest(req);
 
     const { email, password } = req.body;
 
@@ -38,17 +28,7 @@ router.post(
 
     await user.save();
 
-    const userJwt = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
-      JWT_KEY
-    );
-
-    req.session = {
-      jwt: userJwt,
-    };
+    generateJwt(user, req);
 
     res.status(201).send(user);
   }
