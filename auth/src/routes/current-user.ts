@@ -1,19 +1,13 @@
-import { verifyJwt } from "./../services/jwt";
 import express from "express";
+import { currentUser } from "../middlewares/current-user";
 
 const router = express.Router();
 
 router.get(
   "/api/users/currentuser",
+  currentUser,
   (req: express.Request, res: express.Response) => {
-    const token = req.session?.jwt;
-
-    try {
-      const payload = verifyJwt(token);
-      return res.send({ currentUser: payload });
-    } catch (error) {
-      return res.send({ currentUser: null });
-    }
+    res.send({ currentUser: req.currentUser || null });
   }
 );
 

@@ -4,7 +4,7 @@ import { userValidator, validateRequest } from "../middlewares/validators";
 import { User } from "../models/user";
 import { Password } from "./../services/password";
 import { generateJwt } from "../services/jwt";
-import { Unauthorized } from "../errors/unauthorized";
+import { Unauthorized } from "../errors/unauthorized-error";
 
 const router = express.Router();
 
