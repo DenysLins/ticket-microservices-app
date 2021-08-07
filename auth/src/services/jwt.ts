@@ -1,11 +1,8 @@
-import * as dotenv from "dotenv";
 import express from "express";
 import jwt from "jsonwebtoken";
 
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config({ path: "../.env.local" });
-}
 const JWT_KEY = process.env.JWT_KEY || "jwt_key";
+const JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME || 3600;
 
 export const generateJwt = (user: any, req: express.Request) => {
   const userJwt = jwt.sign(
@@ -13,10 +10,21 @@ export const generateJwt = (user: any, req: express.Request) => {
       id: user.id,
       email: user.email,
     },
-    JWT_KEY
+    JWT_KEY,
+    {
+      expiresIn: Number(JWT_EXPIRATION_TIME),
+    }
   );
 
   req.session = {
     jwt: userJwt,
   };
+};
+
+export const verifyJwt = (token: string) => {
+  return jwt.verify(token, JWT_KEY);
+};
+
+export const invalidateJwt = (req: express.Request) => {
+  req.session = null;
 };
