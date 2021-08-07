@@ -24,7 +24,6 @@ export const currentUser = (
     req.currentUser = payload;
     next();
   } catch (error) {
-    console.error(error.message);
     next();
   }
 };
