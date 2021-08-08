@@ -25,10 +25,12 @@ app.use(helmet());
 const COOKIE_KEY_1 = process.env.COOKIE_KEY_1 || "key_1";
 const COOKIE_KEY_2 = process.env.COOKIE_KEY_2 || "key_2";
 
+const secure = process.env.NODE_ENV === "production";
+
 app.use(
   cookieSession({
     keys: [COOKIE_KEY_1, COOKIE_KEY_2],
-    secure: false,
+    secure: secure,
   })
 );
 
