@@ -8,7 +8,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-let jwtCookie: any;
+let cookie: any;
 
 describe("current-user", () => {
   beforeAll((done) => {
@@ -20,7 +20,7 @@ describe("current-user", () => {
         password: "123456",
       })
       .end((err, res) => {
-        jwtCookie = res.header["set-cookie"];
+        cookie = res.header["set-cookie"];
         expect(err).to.be.null;
         expect(res).to.have.status(201);
         done();
@@ -44,7 +44,7 @@ describe("current-user", () => {
     chai
       .request(app)
       .get("/api/users/currentuser")
-      .set("Cookie", `${jwtCookie[0]};${jwtCookie[1]}`)
+      .set("Cookie", cookie)
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);

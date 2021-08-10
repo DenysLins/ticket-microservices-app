@@ -1,5 +1,6 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
+import mongoose from "mongoose";
 
 import { app } from "../../app";
 
@@ -167,5 +168,12 @@ describe("signup", () => {
         expect(res).to.have.status(400);
         done();
       });
+  });
+
+  afterAll(async () => {
+    const collections = await mongoose.connection.db.collections();
+    for (const collection of collections) {
+      await collection.deleteMany({});
+    }
   });
 });
