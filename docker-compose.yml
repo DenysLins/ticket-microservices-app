@@ -1,0 +1,44 @@
+version: "3"
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    ports:
+      - 3000:3000
+  auth:
+    depends_on:
+      - mongo
+    build:
+      context: ./auth
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./auth:/app
+    environment:
+      - NODE_ENV=development
+      - AUTH_PORT=3000
+      - COOKIE_KEY_1=key_1
+      - COOKIE_KEY_2=key_2
+      - AUTH_MONGO_URL=mongo
+      - AUTH_MONGO_PORT=27017
+      - JWT_KEY=jwt_key
+      - JWT_EXPIRATION_TIME=30
+    ports:
+      - 3001:3000
+  mongo:
+    image: "mongo:latest"
+  nginx:
+    restart: always
+    depends_on:
+      - client
+      - auth
+      - mongo
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    ports:
+      - 80:80
