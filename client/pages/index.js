@@ -11,7 +11,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.grid}></div>
+        <div className={styles.grid}>
+          <h1>Welcome!</h1>
+        </div>
       </main>
 
       <footer className={styles.footer}></footer>
