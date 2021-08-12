@@ -7,8 +7,8 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
-    ports:
-      - 3000:3000
+    environment:
+      - NEXT_PUBLIC_AUTH_URL=localhost
   auth:
     depends_on:
       - mongo
@@ -27,8 +27,6 @@ services:
       - AUTH_MONGO_PORT=27017
       - JWT_KEY=jwt_key
       - JWT_EXPIRATION_TIME=30
-    ports:
-      - 3001:3000
   mongo:
     image: "mongo:latest"
   nginx:
