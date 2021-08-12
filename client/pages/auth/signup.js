@@ -1,7 +1,8 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import useRequest from "../../hooks/use-request";
+import styles from "../../styles/SignUp.module.css";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -16,17 +17,17 @@ const SignupSchema = Yup.object().shape({
 });
 
 function SignUp() {
+  const { doRequest, errors } = useRequest();
   return (
     <div className="container">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={SignupSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          const response = await axios.post("/api/users/signup", {
+          doRequest("/api/users/signup", "post", {
             email: values.email,
             password: values.password,
           });
-          console.log(response.data);
           setSubmitting(false);
         }}
       >
@@ -43,7 +44,11 @@ function SignUp() {
                 id="email"
                 className="form-control"
               />
-              <ErrorMessage name="email" component="div" />
+              <ErrorMessage
+                className={styles.errors}
+                name="email"
+                component="div"
+              />
             </div>
             <div className="form-group mt-3">
               <label htmlFor="password" className="form-label">
@@ -55,7 +60,11 @@ function SignUp() {
                 id="password"
                 className="form-control"
               />
-              <ErrorMessage name="password" component="div" />
+              <ErrorMessage
+                className={styles.errors}
+                name="password"
+                component="div"
+              />
             </div>
             <button
               className="btn btn-primary mt-3"
@@ -64,6 +73,7 @@ function SignUp() {
             >
               SignUp
             </button>
+            {errors}
           </Form>
         )}
       </Formik>
