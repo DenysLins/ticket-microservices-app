@@ -1,4 +1,5 @@
 import React from "react";
+import Router from "next/router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useRequest from "../../hooks/use-request";
@@ -24,10 +25,15 @@ function SignUp() {
         initialValues={{ email: "", password: "" }}
         validationSchema={SignupSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          doRequest("/api/users/signup", "post", {
-            email: values.email,
-            password: values.password,
-          });
+          await doRequest(
+            "/api/users/signup",
+            "post",
+            {
+              email: values.email,
+              password: values.password,
+            },
+            () => Router.push("/")
+          );
           setSubmitting(false);
         }}
       >
