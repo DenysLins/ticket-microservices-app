@@ -15,6 +15,17 @@ spec:
       containers:
         - name: client
           image: docker.io/denyslins/tickets-client
+          env:
+            - name: AUTH_URL
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-48cg77dbmk
+                  key: AUTH_URL
+            - name: AUTH_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: tickets-secret-48cg77dbmk
+                  key: AUTH_PORT
           resources:
             limits:
               memory: "128Mi"

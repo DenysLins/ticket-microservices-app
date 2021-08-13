@@ -1,7 +1,8 @@
 import Head from "next/head";
+import axios from "axios";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+const Home = ({ currentUser }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -19,4 +20,17 @@ export default function Home() {
       <footer className={styles.footer}></footer>
     </div>
   );
-}
+};
+
+Home.getInitialProps = async () => {
+  const response = await axios
+    .get(
+      `http://${process.env.AUTH_URL}:${process.env.AUTH_PORT}/api/users/currentuser`
+    )
+    .catch((err) => {
+      console.log(err.message);
+    });
+  return response.data;
+};
+
+export default Home;

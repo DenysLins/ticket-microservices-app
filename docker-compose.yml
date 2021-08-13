@@ -8,7 +8,8 @@ services:
       - /app/node_modules
       - ./client:/app
     environment:
-      - NEXT_PUBLIC_AUTH_URL=localhost
+      - AUTH_URL=nginx
+      - AUTH_PORT=80
   auth:
     depends_on:
       - mongo
