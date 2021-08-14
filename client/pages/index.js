@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "../styles/Home.module.css";
 
 const Home = ({ currentUser }) => {
+  console.log(currentUser);
   return (
     <div className={styles.container}>
       <Head>
@@ -22,15 +23,21 @@ const Home = ({ currentUser }) => {
   );
 };
 
-Home.getInitialProps = async () => {
-  const response = await axios
+export const getServerSideProps = async ({ req }) => {
+  const { data } = await axios
     .get(
-      `http://${process.env.AUTH_URL}:${process.env.AUTH_PORT}/api/users/currentuser`
+      `http://${process.env.AUTH_URL}:${process.env.AUTH_PORT}/api/users/currentuser`,
+      {
+        headers: req.headers,
+      }
     )
     .catch((err) => {
       console.log(err.message);
     });
-  return response.data;
+
+  return {
+    props: data,
+  };
 };
 
 export default Home;
