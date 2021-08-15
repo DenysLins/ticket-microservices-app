@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import useRequest from "../../hooks/use-request";
 import styles from "../../styles/SignUp.module.css";
 
-const SignupSchema = Yup.object().shape({
+const SignUpSchema = Yup.object().shape({
   email: Yup.string()
     .max(64, "Email must be lower than 64 characters")
     .email("Email must be valid")
@@ -23,7 +23,7 @@ function SignUp() {
     <div className="container">
       <Formik
         initialValues={{ email: "", password: "" }}
-        validationSchema={SignupSchema}
+        validationSchema={SignUpSchema}
         onSubmit={async (values, { setSubmitting }) => {
           await doRequest(
             "/api/users/signup",
