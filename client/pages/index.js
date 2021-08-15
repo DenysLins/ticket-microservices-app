@@ -1,6 +1,6 @@
 import Head from "next/head";
-import axios from "axios";
 import styles from "../styles/Home.module.css";
+import axiosBuilder from "../utils/axios-builder";
 
 const Home = ({ currentUser }) => {
   console.log(currentUser);
@@ -23,17 +23,11 @@ const Home = ({ currentUser }) => {
   );
 };
 
-export const getServerSideProps = async ({ req }) => {
-  const { data } = await axios
-    .get(
-      `http://${process.env.AUTH_URL}:${process.env.AUTH_PORT}/api/users/currentuser`,
-      {
-        headers: req.headers,
-      }
-    )
-    .catch((err) => {
-      console.log(err.message);
-    });
+export const getServerSideProps = async (context) => {
+  const axios = axiosBuilder(context);
+  const { data } = await axios.get("/api/users/currentuser").catch((err) => {
+    console.log(err.message);
+  });
 
   return {
     props: data,
