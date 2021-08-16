@@ -7,14 +7,18 @@ const Home = ({ currentUser }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Ticketing</title>
         <meta name="description" content="Ticketing" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <div className={styles.grid}>
-          <h1>Welcome!</h1>
+          {currentUser ? (
+            <h1> You are sign in</h1>
+          ) : (
+            <h1>You are not sign in </h1>
+          )}
         </div>
       </main>
 

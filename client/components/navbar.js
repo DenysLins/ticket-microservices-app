@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 function Navbar() {
   return (
@@ -7,13 +8,13 @@ function Navbar() {
       <div className="container-fluid">
         <Link href="/">
           <a className="navbar-brand">
-            <img
-              id="123"
-              src="images/wallet2.svg"
+            <Image
+              src="/images/wallet2.svg"
               alt="wallet"
-              className="d-inline-block align-text-center me-3"
+              height="22"
+              width="22"
             />
-            Ticketing
+            <span className="ms-3">Ticketing</span>
           </a>
         </Link>
         <button
