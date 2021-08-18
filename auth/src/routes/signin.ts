@@ -1,12 +1,14 @@
 import express from "express";
-
 import {
   userValidator,
   validateRequest,
-  Unauthorized,
-  Password,
+} from "@denyslins-ticketing/common/dist/middlewares";
+import { Unauthorized } from "@denyslins-ticketing/common/dist/errors/unauthorized-error";
+import {
   generateJwt,
-} from "@denyslins-ticketing/common";
+  Password,
+} from "@denyslins-ticketing/common/dist/security";
+
 import { User } from "../models/user";
 
 const router = express.Router();

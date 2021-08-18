@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Password } from "@denyslins-ticketing/common";
+import { Password } from "@denyslins-ticketing/common/dist/security/password";
 
 interface UserAttrs {
   email: string;

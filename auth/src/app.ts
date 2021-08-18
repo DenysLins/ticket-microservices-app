@@ -14,7 +14,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { signInRouter } from "./routes/signin";
 import { signOutRouter } from "./routes/signout";
 import { signUpRouter } from "./routes/signup";
-import { errorHandler } from "@denyslins-ticketing/common";
+import { errorHandler } from "@denyslins-ticketing/common/dist/middlewares/error-handler";
 
 const app = express();
 app.set("trust proxy", true);

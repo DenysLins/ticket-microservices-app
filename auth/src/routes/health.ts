@@ -1,5 +1,8 @@
 import express from "express";
-import { currentUser, requireAuth } from "@denyslins-ticketing/common";
+import {
+  currentUser,
+  requireAuth,
+} from "@denyslins-ticketing/common/dist/middlewares";
 
 const router = express.Router();
 

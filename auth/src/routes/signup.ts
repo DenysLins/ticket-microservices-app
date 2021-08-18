@@ -1,11 +1,10 @@
 import express from "express";
-
 import {
   userValidator,
   validateRequest,
-  BadRequestError,
-  generateJwt,
-} from "@denyslins-ticketing/common";
+} from "@denyslins-ticketing/common/dist/middlewares";
+import { BadRequestError } from "@denyslins-ticketing/common/dist/errors/bad-request-error";
+import { generateJwt } from "@denyslins-ticketing/common/dist/security/jwt";
 
 import { User } from "../models/user";
 

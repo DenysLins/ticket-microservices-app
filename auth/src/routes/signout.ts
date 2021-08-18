@@ -1,5 +1,5 @@
 import express from "express";
-import { invalidateJwt } from "@denyslins-ticketing/common";
+import { invalidateJwt } from "@denyslins-ticketing/common/dist/security/jwt";
 
 const router = express.Router();
 
