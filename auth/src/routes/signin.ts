@@ -1,10 +1,13 @@
 import express from "express";
 
-import { userValidator, validateRequest } from "../middlewares/validators";
+import {
+  userValidator,
+  validateRequest,
+  Unauthorized,
+  Password,
+  generateJwt,
+} from "@denyslins-ticketing/common";
 import { User } from "../models/user";
-import { Password } from "./../services/password";
-import { generateJwt } from "../services/jwt";
-import { Unauthorized } from "../errors/unauthorized-error";
 
 const router = express.Router();
 
