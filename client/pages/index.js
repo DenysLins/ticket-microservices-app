@@ -1,17 +1,9 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import axiosBuilder from "../utils/axios-builder";
+import styles from "../styles/Home.module.css";
 
 const Home = ({ currentUser }) => {
-  console.log(currentUser);
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Ticketing</title>
-        <meta name="description" content="Ticketing" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <div className={styles.grid}>
           {currentUser ? (
