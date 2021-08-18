@@ -13,6 +13,13 @@ export const userValidator = [
     .withMessage("Password must be between 6 and 16 characters"),
 ];
 
+export const ticketValidator = [
+  body("title")
+    .trim()
+    .isLength({ min: 3, max: 64 })
+    .withMessage("Title must be valid"),
+  body("price").trim().isCurrency().withMessage("Price must be valid"),
+];
 export const validateRequest = (
   req: express.Request,
   res: express.Response,
