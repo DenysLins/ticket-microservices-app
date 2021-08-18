@@ -10,5 +10,5 @@ export * from "./middlewares/error-handler";
 export * from "./middlewares/require-auth";
 export * from "./middlewares/validators";
 
-export * from "./services/jwt";
-export * from "./services/password";
+export * from "./security/jwt";
+export * from "./security/password";

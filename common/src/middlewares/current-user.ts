@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyJwt } from "../services/jwt";
+import { verifyJwt } from "../security/jwt";
 
 interface UserPayload {
   id: string;
