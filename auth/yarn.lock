@@ -310,9 +310,9 @@
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
 "@denyslins-ticketing/common@^1.0.14":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@denyslins-ticketing/common/-/common-1.0.14.tgz#8bc23ca083f5a0d4c0192df1e0853cdd2ace6ceb"
-  integrity sha512-ZC0j/VzVEIc6gW8fPptAtfFM9tKjqfmf1OlIoaRIffhCH546eeQwEosMHlFbbXhQ1y49QYFM0gctzLDeYVUUQg==
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@denyslins-ticketing/common/-/common-1.0.15.tgz#34344bdc68eba0df138e9fea08e1fed70f0f9f3e"
+  integrity sha512-eQeWgji+dvmDYtBt3YWpK0LTq5zoeKCxRPknNHorXxGVZ7ExmVVuPR+Ja6Q3/6wgmL161ymf73S2eT4XZ0gDNw==
   dependencies:
     cookie-session "^1.4.0"
     express "^4.17.1"
