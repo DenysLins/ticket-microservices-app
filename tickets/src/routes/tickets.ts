@@ -5,10 +5,11 @@ import {
   ticketValidator,
   validateRequest,
 } from "@denyslins-ticketing/common/dist/middlewares";
-import { Unauthorized } from "@denyslins-ticketing/common/dist/errors/unauthorized-error";
-
+import {
+  BadRequestError,
+  NotFoundError,
+} from "@denyslins-ticketing/common/dist/errors";
 import { Ticket } from "../models/ticket";
-import { NotFound } from "@denyslins-ticketing/common";
 
 const router = express.Router();
 
@@ -18,10 +19,6 @@ router.get(
   requireAuth,
   async (req: express.Request, res: express.Response) => {
     const tickets = await Ticket.find({});
-
-    if (!tickets) {
-      throw new NotFound("Tickets not found");
-    }
 
     res.status(200).send(tickets);
   }
@@ -33,13 +30,13 @@ router.get(
   requireAuth,
   async (req: express.Request, res: express.Response) => {
     const { id } = req.params;
-    const tickets = await Ticket.findOne({ id });
+    const ticket = await Ticket.findOne({ id });
 
-    if (!tickets) {
-      throw new NotFound("Tickets not found");
+    if (!ticket) {
+      throw new NotFoundError("Ticket not found");
     }
 
-    res.status(200).send(tickets);
+    res.status(200).send(ticket);
   }
 );
 
@@ -51,13 +48,21 @@ router.post(
   validateRequest,
   async (req: express.Request, res: express.Response) => {
     const { title, price } = req.body;
+    const user = req.currentUser;
 
-    const ticket = await Ticket.findOne({ title, price });
+    let ticket = await Ticket.findOne({ title, price, userId: user?.id });
 
-    if (!ticket) {
-      throw new Unauthorized("Invalid credentials");
+    if (ticket) {
+      throw new BadRequestError("Ticket already exists");
     }
 
+    ticket = Ticket.build({
+      title,
+      price,
+      userId: user?.id || "",
+    });
+
+    ticket = await ticket.save();
     res.status(200).send(ticket);
   }
 );
@@ -70,12 +75,18 @@ router.put(
   validateRequest,
   async (req: express.Request, res: express.Response) => {
     const { title, price } = req.body;
+    const user = req.currentUser;
 
-    const ticket = await Ticket.findOne({ title, price });
+    let ticket = await Ticket.findOne({ userId: user?.id });
 
     if (!ticket) {
-      throw new Unauthorized("Invalid credentials");
+      throw new NotFoundError("Ticket not found");
     }
+
+    ticket.title = title;
+    ticket.price = price;
+
+    ticket = await ticket.save();
 
     res.status(200).send(ticket);
   }

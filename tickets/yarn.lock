@@ -310,9 +310,9 @@
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
 "@denyslins-ticketing/common@^1.0.14":
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/@denyslins-ticketing/common/-/common-1.0.15.tgz#34344bdc68eba0df138e9fea08e1fed70f0f9f3e"
-  integrity sha512-eQeWgji+dvmDYtBt3YWpK0LTq5zoeKCxRPknNHorXxGVZ7ExmVVuPR+Ja6Q3/6wgmL161ymf73S2eT4XZ0gDNw==
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@denyslins-ticketing/common/-/common-1.0.16.tgz#fe92956702e0511f087d51040ef77607bebeb83a"
+  integrity sha512-IOkFOQR19dkHRodZRLbIgFKGA+lkMcof+ZPOkDgDd7mL6BFPFQdy2zgo7MUnGkxYS0VGlMzhGyiS1gbfgquSJg==
   dependencies:
     cookie-session "^1.4.0"
     express "^4.17.1"
@@ -746,9 +746,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@^16.4.5":
-  version "16.6.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.6.1.tgz#aee62c7b966f55fc66c7b6dfa1d58db2a616da61"
-  integrity sha512-Sr7BhXEAer9xyGuCN3Ek9eg9xPviCF2gfu9kTfuU2HkTVAMYSDeX40fvpmo72n5nansg3nsBjuQBrsS28r+NUw==
+  version "16.6.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.6.2.tgz#331b7b9f8621c638284787c5559423822fdffc50"
+  integrity sha512-LSw8TZt12ZudbpHc6EkIyDM3nHVWKYrAvGy6EAJfNfjusbwnThqjqxUKKRwuV3iWYeW/LYMzNgaq3MaLffQ2xA==
 
 "@types/prettier@^2.1.5":
   version "2.3.2"
@@ -1662,9 +1662,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.811:
-  version "1.3.811"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.811.tgz#df5a7b18267a0b8b6ffed0dde63b9fb701f777f8"
-  integrity sha512-hv3kgf6YSd+jQ7J+7Kdm44yux/1vxcAwfGV/6M6Nq4E9zJ3Bml/P2+vULCvqLS6Lh9knBCQ7iEMvyeDiGe5EbA==
+  version "1.3.812"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.812.tgz#4c4fb407e0e1335056097f172e9f2c0a09efe77d"
+  integrity sha512-7KiUHsKAWtSrjVoTSzxQ0nPLr/a+qoxNZwkwd9LkylTOgOXSVXkQbpIVT0WAUQcI5gXq3SwOTCrK+WfINHOXQg==
 
 emittery@^0.8.1:
   version "0.8.1"
