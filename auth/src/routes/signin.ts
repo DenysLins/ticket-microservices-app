@@ -3,7 +3,7 @@ import {
   userValidator,
   validateRequest,
 } from "@denyslins-ticketing/common/dist/middlewares";
-import { Unauthorized } from "@denyslins-ticketing/common/dist/errors/unauthorized-error";
+import { UnauthorizedError } from "@denyslins-ticketing/common/dist/errors/unauthorized-error";
 import {
   generateJwt,
   Password,
@@ -23,13 +23,13 @@ router.post(
     const user = await User.findOne({ email });
 
     if (!user) {
-      throw new Unauthorized("Invalid credentials");
+      throw new UnauthorizedError("Invalid credentials");
     }
 
     const passwordsMatch = await Password.compare(user.password, password);
 
     if (!passwordsMatch) {
-      throw new Unauthorized("Invalid credentials");
+      throw new UnauthorizedError("Invalid credentials");
     }
 
     generateJwt(user, req);
