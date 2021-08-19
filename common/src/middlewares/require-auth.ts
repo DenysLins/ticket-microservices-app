@@ -1,5 +1,5 @@
 import express from "express";
-import { Unauthorized } from "../errors/unauthorized-error";
+import { UnauthorizedError } from "../errors/unauthorized-error";
 
 export const requireAuth = (
   req: express.Request,
@@ -7,7 +7,7 @@ export const requireAuth = (
   next: express.NextFunction
 ) => {
   if (!req.currentUser) {
-    throw new Unauthorized("Not authorized");
+    throw new UnauthorizedError("Unauthorized");
   }
   next();
 };
