@@ -14,47 +14,47 @@ spec:
     spec:
       containers:
         - name: tickets
-          image: docker.io/denyslins/tickets-tickets
+          image: docker.io/denyslins/ticketing-tickets
           env:
             - name: NODE_ENV
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-48cg77dbmk
+                  name: tickets-secret-hcm7h9574t
                   key: NODE_ENV
             - name: TICKETS_PORT
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-48cg77dbmk
+                  name: tickets-secret-hcm7h9574t
                   key: TICKETS_PORT
             - name: COOKIE_KEY_1
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-48cg77dbmk
+                  name: tickets-secret-hcm7h9574t
                   key: COOKIE_KEY_1
             - name: COOKIE_KEY_2
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-48cg77dbmk
+                  name: tickets-secret-hcm7h9574t
                   key: COOKIE_KEY_2
             - name: TICKETS_MONGO_URL
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-48cg77dbmk
+                  name: tickets-secret-hcm7h9574t
                   key: TICKETS_MONGO_URL
             - name: TICKETS_MONGO_PORT
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-48cg77dbmk
+                  name: tickets-secret-hcm7h9574t
                   key: TICKETS_MONGO_PORT
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-48cg77dbmk
+                  name: tickets-secret-hcm7h9574t
                   key: JWT_KEY
             - name: JWT_EXPIRATION_TIME
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-48cg77dbmk
+                  name: tickets-secret-hcm7h9574t
                   key: JWT_EXPIRATION_TIME
           resources:
             limits:
