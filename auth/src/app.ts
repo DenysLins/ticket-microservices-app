@@ -15,6 +15,7 @@ import { signInRouter } from "./routes/signin";
 import { signOutRouter } from "./routes/signout";
 import { signUpRouter } from "./routes/signup";
 import { errorHandler } from "@denyslins-ticketing/common/dist/middlewares/error-handler";
+import { NotFoundError } from "@denyslins-ticketing/common/dist/errors/not-found-error";
 
 const app = express();
 app.set("trust proxy", true);
@@ -39,6 +40,10 @@ app.use(currentUserRouter);
 app.use(signInRouter);
 app.use(signOutRouter);
 app.use(signUpRouter);
+
+app.all("*", async () => {
+  throw new NotFoundError("Resource not found");
+});
 
 app.use(errorHandler);
 
