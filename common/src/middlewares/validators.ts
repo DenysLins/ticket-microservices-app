@@ -18,8 +18,14 @@ export const ticketValidator = [
     .trim()
     .isLength({ min: 3, max: 64 })
     .withMessage("Title must be valid"),
-  body("price").trim().isCurrency().withMessage("Price must be valid"),
+  body("price")
+    .trim()
+    .isLength({ max: 16 })
+    .isCurrency()
+    .custom((price) => Number(price) >= 0)
+    .withMessage("Price must be valid"),
 ];
+
 export const validateRequest = (
   req: express.Request,
   res: express.Response,
