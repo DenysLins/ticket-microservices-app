@@ -200,6 +200,23 @@ describe("tickets", () => {
       });
   });
 
+  it("returns a 404 with an inexistent ticket id", (done) => {
+    const id = new mongoose.Types.ObjectId().toHexString();
+    chai
+      .request(app)
+      .put(`/api/tickets/${id}`)
+      .send({
+        title: "Sample Title",
+        price: "10.00",
+      })
+      .set("Cookie", cookie)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(404);
+        done();
+      });
+  });
+
   afterAll(async () => {
     const collections = await mongoose.connection.db.collections();
     for (const collection of collections) {

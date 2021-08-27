@@ -15,27 +15,31 @@ let ticketId: string = "";
 describe("tickets", () => {
   beforeAll((done) => {
     cookie = signIn();
-    chai
-      .request(app)
-      .post("/api/tickets")
-      .send({
-        title: "Sample Title",
-        price: "10.00",
-      })
-      .set("Cookie", cookie)
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(201);
-        expect(res.body).to.have.property("title");
-        expect(res.body).to.have.property("price");
-        expect(res.body).to.have.property("userId");
-        expect(res.body).to.have.property("id");
-        ticketId = res.body.id;
-        expect(res.body.title).to.be.equal("Sample Title");
-        expect(res.body.price).to.be.equal("10.00");
-        expect(res.body.userId).to.be.equal("FakeIdFakeIdFakeIdFakeId");
-        done();
-      });
+
+    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    for (let num of numbers) {
+      chai
+        .request(app)
+        .post("/api/tickets")
+        .send({
+          title: `Sample Title ${num}`,
+          price: "10.00",
+        })
+        .set("Cookie", cookie)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(201);
+          expect(res.body).to.have.property("title");
+          expect(res.body).to.have.property("price");
+          expect(res.body).to.have.property("userId");
+          expect(res.body).to.have.property("id");
+          ticketId = res.body.id;
+          expect(res.body.title).to.be.equal(`Sample Title ${num}`);
+          expect(res.body.price).to.be.equal("10.00");
+          expect(res.body.userId).to.be.equal("FakeIdFakeIdFakeIdFakeId");
+          done();
+        });
+    }
   });
 
   it("returns a 200 with a list of tickets", (done) => {
@@ -45,6 +49,7 @@ describe("tickets", () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
+        expect(res.body).to.have.length(10);
         done();
       });
   });
@@ -72,9 +77,10 @@ describe("tickets", () => {
   });
 
   it("returns a 404 with an inexistent ticket id", (done) => {
+    const id = new mongoose.Types.ObjectId().toHexString();
     chai
       .request(app)
-      .get("/api/tickets/61283ee8e9f5115b7462fc99")
+      .get(`/api/tickets/${id}`)
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(404);

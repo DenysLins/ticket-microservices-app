@@ -22,7 +22,7 @@ router.get(
     const { id } = req.params;
     let ticket: any = null;
     try {
-      ticket = await Ticket.findOne({ _id: id });
+      ticket = await Ticket.findById(id);
     } catch (error) {
       throw new BadRequestError(
         "id must be a single String of 12 bytes or a string of 24 hex characters"
