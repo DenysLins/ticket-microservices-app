@@ -21,6 +21,7 @@ export const ticketValidator = [
   body("price")
     .trim()
     .isLength({ max: 16 })
+    .isString()
     .isCurrency()
     .custom((price) => Number(price) >= 0)
     .withMessage("Price must be valid"),
