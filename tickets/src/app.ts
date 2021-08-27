@@ -10,8 +10,11 @@ import helmet from "helmet";
 import cookieSession from "cookie-session";
 
 import { healthRouter } from "./routes/health";
-import { ticketsRouter } from "./routes/tickets";
 import { errorHandler } from "@denyslins-ticketing/common/dist/middlewares/error-handler";
+import { NotFoundError } from "@denyslins-ticketing/common/dist/errors";
+import { createRouter } from "./routes/create";
+import { readRouter } from "./routes/read";
+import { updateRouter } from "./routes/update";
 
 const app = express();
 app.set("trust proxy", true);
@@ -32,7 +35,13 @@ app.use(
 );
 
 app.use(healthRouter);
-app.use(ticketsRouter);
+app.use(createRouter);
+app.use(readRouter);
+app.use(updateRouter);
+
+app.all("*", async () => {
+  throw new NotFoundError("Resource not found");
+});
 
 app.use(errorHandler);
 
