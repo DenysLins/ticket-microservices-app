@@ -54,14 +54,13 @@ describe("tickets", () => {
       });
   });
 
-  it("returns a 400 when creating a new ticket with existent title, price and userId", (done) => {
+  it("returns a 400 when creating a new ticket with existent title, price", (done) => {
     chai
       .request(app)
       .post("/api/tickets")
       .send({
         title: "Sample Title",
         price: "10.00",
-        userId: "FakeIdFakeIdFakeIdFakeId",
       })
       .set("Cookie", cookie)
       .end((err, res) => {

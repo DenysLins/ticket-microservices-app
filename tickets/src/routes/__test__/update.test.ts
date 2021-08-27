@@ -45,7 +45,6 @@ describe("tickets", () => {
       .send({
         title: "Title Sample",
         price: "5.00",
-        userId: "FakeIdFakeIdFakeIdFakeId",
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -61,7 +60,6 @@ describe("tickets", () => {
       .send({
         title: "Title Sample",
         price: "5.00",
-        userId: "FakeIdFakeIdFakeIdFakeId",
       })
       .set("Cookie", cookie)
       .end((err, res) => {
