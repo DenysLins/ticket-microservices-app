@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@types/node": "^16.10.9",
+    "node-nats-streaming": "^0.3.2",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "publisher": "ts-node-dev --rs --notify false src/publisher.ts",
+    "listener": "ts-node-dev --rs --notify false src/listener.ts"
+  }
+}
