@@ -1,6 +1,4 @@
 import { TicketCreatedPublisher } from "./events/ticket-created-publisher";
-import { Subjects } from "./events/subjects";
-import { TicketCreatedEvent } from "./events/ticket-created-event";
 import nats from "node-nats-streaming";
 
 console.clear();
@@ -18,5 +16,6 @@ stan.on("connect", async () => {
     id: "123",
     title: "Concert",
     price: 20,
+    userId: "1",
   });
 });
