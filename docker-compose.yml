@@ -10,9 +10,29 @@ services:
     environment:
       - AUTH_URL=nginx
       - AUTH_PORT=80
+  nats:
+    image: "nats-streaming:latest"
+    command:
+      - "-p"
+      - "4222"
+      - "-m"
+      - "8222"
+      - "-hbi"
+      - "5s"
+      - "-hbt"
+      - "5s"
+      - "-hbf"
+      - "2"
+      - "-SD"
+      - "-cid"
+      - "ticketing"
+    ports:
+      - 4222:4222
+      - 8222:8222
   auth:
     depends_on:
       - auth_mongo
+      - nats
     build:
       context: ./auth
       dockerfile: Dockerfile.dev
@@ -31,6 +51,7 @@ services:
   tickets:
     depends_on:
       - tickets_mongo
+      - nats
     build:
       context: ./tickets
       dockerfile: Dockerfile.dev
@@ -46,6 +67,10 @@ services:
       - TICKETS_MONGO_PORT=27017
       - JWT_KEY=jwt_key
       - JWT_EXPIRATION_TIME=30
+      - NATS_CLUSTER_ID=ticketing
+      - NATS_URL=http://nats
+      - NATS_PORT=4222
+      - NATS_CLIENT_ID=
   auth_mongo:
     image: "mongo:latest"
   tickets_mongo:
@@ -57,6 +82,7 @@ services:
       - auth
       - auth_mongo
       - tickets_mongo
+      - nats
     build:
       context: ./nginx
       dockerfile: Dockerfile.dev
