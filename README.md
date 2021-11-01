@@ -2,7 +2,21 @@
 
 To run locally:
 
+```sh
 docker-compose up
+```
+
+To build each container locally:
+
+```sh
+docker build -t _image name_ .
+```
+
+To publish each container to docker.io
+
+```sh
+docker push _image name_
+```
 
 To deploy to Okteto:
 
