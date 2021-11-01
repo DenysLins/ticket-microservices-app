@@ -9,21 +9,21 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-let cookie: string = "";
-let ticketId: string = "";
+let cookie = "";
+let ticketId = "";
 
 describe("tickets", () => {
   beforeAll((done) => {
     cookie = signIn();
 
-    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    for (let num of numbers) {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    for (const num of numbers) {
       chai
         .request(app)
         .post("/api/tickets")
         .send({
           title: `Sample Title ${num}`,
-          price: "10.00",
+          price: 10,
         })
         .set("Cookie", cookie)
         .end((err, res) => {
@@ -35,7 +35,7 @@ describe("tickets", () => {
           expect(res.body).to.have.property("id");
           ticketId = res.body.id;
           expect(res.body.title).to.be.equal(`Sample Title ${num}`);
-          expect(res.body.price).to.be.equal("10.00");
+          expect(res.body.price).to.be.equal(10);
           expect(res.body.userId).to.be.equal("FakeIdFakeIdFakeIdFakeId");
           done();
         });

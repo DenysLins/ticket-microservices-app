@@ -9,6 +9,8 @@ const COOKIE_KEY_1 = process.env.COOKIE_KEY_1 || "key_1";
 const COOKIE_KEY_2 = process.env.COOKIE_KEY_2 || "key_2";
 let mongo: any;
 
+jest.mock("../nats-wrapper");
+
 beforeAll(async () => {
   mongo = await MongoMemoryServer.create();
   const mongoUri = await mongo.getUri();

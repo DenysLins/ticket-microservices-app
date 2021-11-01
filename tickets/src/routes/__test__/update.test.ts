@@ -20,7 +20,7 @@ describe("tickets", () => {
       .post(`/api/tickets`)
       .send({
         title: "Sample Title",
-        price: "10.00",
+        price: 10,
       })
       .set("Cookie", cookie)
       .end((err, res) => {
@@ -32,7 +32,7 @@ describe("tickets", () => {
         expect(res.body).to.have.property("id");
         ticketId = res.body.id;
         expect(res.body.title).to.be.equal("Sample Title");
-        expect(res.body.price).to.be.equal("10.00");
+        expect(res.body.price).to.be.equal(10);
         expect(res.body.userId).to.be.equal("FakeIdFakeIdFakeIdFakeId");
         done();
       });
@@ -44,7 +44,7 @@ describe("tickets", () => {
       .put(`/api/tickets/${ticketId}`)
       .send({
         title: "Title Sample",
-        price: "5.00",
+        price: 5,
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -59,7 +59,7 @@ describe("tickets", () => {
       .put(`/api/tickets/${ticketId}`)
       .send({
         title: "Title Sample",
-        price: "5.00",
+        price: 5,
       })
       .set("Cookie", cookie)
       .end((err, res) => {
@@ -70,7 +70,7 @@ describe("tickets", () => {
         expect(res.body).to.have.property("userId");
         expect(res.body).to.have.property("id");
         expect(res.body.title).to.be.equal("Title Sample");
-        expect(res.body.price).to.be.equal("5.00");
+        expect(res.body.price).to.be.equal(5);
         expect(res.body.userId).to.be.equal("FakeIdFakeIdFakeIdFakeId");
         done();
       });
@@ -81,7 +81,7 @@ describe("tickets", () => {
       .request(app)
       .put(`/api/tickets/${ticketId}`)
       .send({
-        price: "10.00",
+        price: 10,
       })
       .set("Cookie", cookie)
       .end((err, res) => {
@@ -125,7 +125,7 @@ describe("tickets", () => {
       .put(`/api/tickets/${ticketId}`)
       .send({
         title: "ab",
-        price: "10.00",
+        price: 10,
       })
       .set("Cookie", cookie)
       .end((err, res) => {
@@ -142,7 +142,7 @@ describe("tickets", () => {
       .send({
         title:
           "bvgfdsertyudjfjaldjflakjdlkfjaldskjfalksdjflkajsdlfkjaldskfjalskl",
-        price: "10.00",
+        price: 10,
       })
       .set("Cookie", cookie)
       .end((err, res) => {
@@ -207,7 +207,7 @@ describe("tickets", () => {
       .put(`/api/tickets/${id}`)
       .send({
         title: "Sample Title",
-        price: "10.00",
+        price: 10,
       })
       .set("Cookie", cookie)
       .end((err, res) => {
