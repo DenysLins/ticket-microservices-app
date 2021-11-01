@@ -19,12 +19,12 @@ spec:
             - name: AUTH_URL
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-hcm7h9574t
+                  name: tickets-secret-4d82bbmdk5
                   key: AUTH_URL
             - name: AUTH_PORT
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-hcm7h9574t
+                  name: tickets-secret-4d82bbmdk5
                   key: AUTH_PORT
           resources:
             limits:
