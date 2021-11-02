@@ -27,6 +27,20 @@ export const ticketValidator = [
     .withMessage("Price must be valid"),
 ];
 
+export const orderValidator = [
+  body("title")
+    .trim()
+    .isLength({ min: 3, max: 64 })
+    .withMessage("Title must be valid"),
+  body("price")
+    .trim()
+    .isLength({ max: 16 })
+    .isString()
+    .isCurrency()
+    .custom((price) => Number(price) >= 0)
+    .withMessage("Price must be valid"),
+];
+
 export const validateRequest = (
   req: express.Request,
   res: express.Response,
