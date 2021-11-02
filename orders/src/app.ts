@@ -14,7 +14,7 @@ import { errorHandler } from "@denyslins-ticketing/common/dist/middlewares/error
 import { NotFoundError } from "@denyslins-ticketing/common/dist/errors";
 import { createRouter } from "./routes/create";
 import { readRouter } from "./routes/read";
-import { updateRouter } from "./routes/update";
+import { deleteRouter } from "./routes/delete";
 
 const app = express();
 app.set("trust proxy", true);
@@ -37,7 +37,7 @@ app.use(
 app.use(healthRouter);
 app.use(createRouter);
 app.use(readRouter);
-app.use(updateRouter);
+app.use(deleteRouter);
 
 app.all("*", async () => {
   throw new NotFoundError("Resource not found");
