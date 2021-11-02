@@ -42,15 +42,15 @@ services:
     environment:
       - NODE_ENV=development
       - AUTH_PORT=3000
-      - COOKIE_KEY_1=key_1
-      - COOKIE_KEY_2=key_2
       - AUTH_MONGO_URL=auth_mongo
       - AUTH_MONGO_PORT=27017
+      - COOKIE_KEY_1=key_1
+      - COOKIE_KEY_2=key_2
       - JWT_KEY=jwt_key
       - JWT_EXPIRATION_TIME=30
   tickets:
     depends_on:
-      - tickets_mongo
+      # - tickets_mongo
       - nats
     build:
       context: ./tickets
@@ -61,7 +61,8 @@ services:
     environment:
       - NODE_ENV=development
       - TICKETS_PORT=3000
-      - TICKETS_MONGO_URL=tickets_mongo
+      # - TICKETS_MONGO_URL=tickets_mongo
+      - TICKETS_MONGO_URL=auth_mongo
       - TICKETS_MONGO_PORT=27017
       - COOKIE_KEY_1=key_1
       - COOKIE_KEY_2=key_2
@@ -73,7 +74,7 @@ services:
       - NATS_CLIENT_ID=
   orders:
     depends_on:
-      - orders_mongo
+      # - orders_mongo
       - nats
     build:
       context: ./orders
@@ -84,7 +85,8 @@ services:
     environment:
       - NODE_ENV=development
       - ORDERS_PORT=3000
-      - ORDERS_MONGO_URL=orders_mongo
+      # - ORDERS_MONGO_URL=orders_mongo
+      - ORDERS_MONGO_URL=auth_mongo
       - ORDERS_MONGO_PORT=27017
       - COOKIE_KEY_1=key_1
       - COOKIE_KEY_2=key_2
@@ -96,10 +98,10 @@ services:
       - NATS_CLIENT_ID=
   auth_mongo:
     image: "mongo:latest"
-  tickets_mongo:
-    image: "mongo:latest"
-  orders_mongo:
-    image: "mongo:latest"
+  # tickets_mongo:
+  #   image: "mongo:latest"
+  # orders_mongo:
+  #   image: "mongo:latest"
   nginx:
     restart: always
     depends_on:
@@ -107,9 +109,9 @@ services:
       - auth
       - auth_mongo
       - tickets
-      - tickets_mongo
+      # - tickets_mongo
       - orders
-      - orders_mongo
+      # - orders_mongo
       - nats
     build:
       context: ./nginx
