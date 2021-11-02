@@ -9,7 +9,7 @@ const TICKETS_MONGO_PORT = process.env.TICKETS_MONGO_PORT || 27017;
 const NATS_CLUSTER_ID = process.env.NATS_CLUSTER_ID || "ticketing";
 const NATS_CLIENT_ID =
   process.env.NATS_CLIENT_ID || randomBytes(4).toString("hex");
-const NATS_URL = process.env.NATS_URL || "localhost";
+const NATS_URL = process.env.NATS_URL || "http://nats";
 const NATS_PORT = process.env.NATS_PORT || 4222;
 
 const start = async () => {
