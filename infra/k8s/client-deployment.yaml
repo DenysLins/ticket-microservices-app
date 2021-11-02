@@ -19,12 +19,12 @@ spec:
             - name: AUTH_URL
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-4d82bbmdk5
+                  name: tickets-secret-mgb5tkt48c
                   key: AUTH_URL
             - name: AUTH_PORT
               valueFrom:
                 secretKeyRef:
-                  name: tickets-secret-4d82bbmdk5
+                  name: tickets-secret-mgb5tkt48c
                   key: AUTH_PORT
           resources:
             limits:
