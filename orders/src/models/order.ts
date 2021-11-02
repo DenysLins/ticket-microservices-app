@@ -4,7 +4,7 @@ import { TicketDoc } from "./ticket";
 
 export { OrderStatus };
 
-export const isValidId = (id: string) => {
+export const isValidId = (id: string): boolean => {
   return mongoose.Types.ObjectId.isValid(id);
 };
 

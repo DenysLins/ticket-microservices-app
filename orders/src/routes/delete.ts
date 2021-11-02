@@ -43,10 +43,9 @@ router.delete(
 
     await new OrderCanceledPublisher(natsWrapper.client).publish({
       id: order.id,
-      userId: order.userId,
-      status: order.status,
-      expiresAt: order.expiresAt,
-      ticket: order.ticket,
+      ticket: {
+        id: order.ticket.id,
+      },
     });
 
     res.status(200).send(order);

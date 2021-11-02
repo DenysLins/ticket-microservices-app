@@ -54,10 +54,13 @@ router.post(
 
     await new OrderCreatedPublisher(natsWrapper.client).publish({
       id: order.id,
-      userId: order.userId,
       status: order.status,
-      expiresAt: order.expiresAt,
-      ticket: order.ticket,
+      userId: order.userId,
+      expiresAt: order.expiresAt.toISOString(),
+      ticket: {
+        id: ticket.id,
+        price: ticket.price,
+      },
     });
 
     res.status(201).send(order);

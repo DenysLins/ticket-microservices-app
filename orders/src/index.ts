@@ -9,7 +9,7 @@ const ORDERS_MONGO_PORT = process.env.ORDERS_MONGO_PORT || 27017;
 const NATS_CLUSTER_ID = process.env.NATS_CLUSTER_ID || "ticketing";
 const NATS_CLIENT_ID =
   process.env.NATS_CLIENT_ID || randomBytes(4).toString("hex");
-const NATS_URL = process.env.NATS_URL || "http://nats";
+const NATS_URL = process.env.NATS_URL || "nats";
 const NATS_PORT = process.env.NATS_PORT || 4222;
 
 const start = async () => {
@@ -17,7 +17,7 @@ const start = async () => {
     await natsWrapper.connect(
       NATS_CLUSTER_ID,
       NATS_CLIENT_ID,
-      `${NATS_URL}:${NATS_PORT}`
+      `http://${NATS_URL}:${NATS_PORT}`
     );
     console.log(`Connected to NATS in ${NATS_URL}:${NATS_PORT}`);
 
