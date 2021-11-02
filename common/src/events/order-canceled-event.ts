@@ -1,9 +1,9 @@
-import { OrderStatus } from "./types/order-status";
 import { Subjects } from "./subjects";
+import { OrderStatus } from "./types/order-status";
 import { TicketDoc } from "./types/ticket-doc";
 
-export interface OrderCreatedEvent {
-  subject: Subjects.OrderCreated;
+export interface OrderCanceledEvent {
+  subject: Subjects.OrderCanceled;
   data: {
     id: string;
     userId: string;

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import express, { NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 import { RequestValidationError } from "../errors/request-validation-error";
@@ -28,17 +29,11 @@ export const ticketValidator = [
 ];
 
 export const orderValidator = [
-  body("title")
-    .trim()
-    .isLength({ min: 3, max: 64 })
-    .withMessage("Title must be valid"),
-  body("price")
-    .trim()
-    .isLength({ max: 16 })
-    .isString()
-    .isCurrency()
-    .custom((price) => Number(price) >= 0)
-    .withMessage("Price must be valid"),
+  body("ticketId")
+    .not()
+    .isEmpty()
+    .custom((input: string) => mongoose.Types.ObjectId.isValid(input))
+    .withMessage("ticketId must be provided"),
 ];
 
 export const validateRequest = (
