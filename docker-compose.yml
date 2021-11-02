@@ -69,7 +69,7 @@ services:
       - JWT_KEY=jwt_key
       - JWT_EXPIRATION_TIME=30
       - NATS_CLUSTER_ID=ticketing
-      - NATS_URL=http://nats
+      - NATS_URL=nats
       - NATS_PORT=4222
       - NATS_CLIENT_ID=
   orders:
@@ -93,7 +93,7 @@ services:
       - JWT_KEY=jwt_key
       - JWT_EXPIRATION_TIME=30
       - NATS_CLUSTER_ID=ticketing
-      - NATS_URL=http://nats
+      - NATS_URL=nats
       - NATS_PORT=4222
       - NATS_CLIENT_ID=
   auth_mongo:
