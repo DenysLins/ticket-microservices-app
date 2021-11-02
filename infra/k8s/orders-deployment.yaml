@@ -1,41 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tickets-deployment
+  name: orders-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tickets
+      app: orders
   template:
     metadata:
       labels:
-        app: tickets
+        app: orders
     spec:
       containers:
-        - name: tickets
-          image: docker.io/denyslins/ticketing-tickets
+        - name: orders
+          image: docker.io/denyslins/ticketing-orders
           env:
             - name: NODE_ENV
               valueFrom:
                 secretKeyRef:
                   name: tickets-secret-4d82bbmdk5
                   key: NODE_ENV
-            - name: TICKETS_PORT
+            - name: ORDERS_PORT
               valueFrom:
                 secretKeyRef:
                   name: tickets-secret-4d82bbmdk5
-                  key: TICKETS_PORT
-            - name: TICKETS_MONGO_URL
+                  key: ORDERS_PORT
+            - name: ORDERS_MONGO_URL
               valueFrom:
                 secretKeyRef:
                   name: tickets-secret-4d82bbmdk5
-                  key: TICKETS_MONGO_URL
-            - name: TICKETS_MONGO_PORT
+                  key: ORDERS_MONGO_URL
+            - name: ORDERS_MONGO_PORT
               valueFrom:
                 secretKeyRef:
                   name: tickets-secret-4d82bbmdk5
-                  key: TICKETS_MONGO_PORT
+                  key: ORDERS_MONGO_PORT
             - name: COOKIE_KEY_1
               valueFrom:
                 secretKeyRef:
@@ -85,13 +85,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tickets-clusterip-service
+  name: orders-clusterip-service
 spec:
   type: ClusterIP
   selector:
-    app: tickets
+    app: orders
   ports:
-    - name: tickets
+    - name: orders
       protocol: TCP
       port: 3000
       targetPort: 3000
