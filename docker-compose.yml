@@ -61,10 +61,33 @@ services:
     environment:
       - NODE_ENV=development
       - TICKETS_PORT=3000
-      - COOKIE_KEY_1=key_1
-      - COOKIE_KEY_2=key_2
       - TICKETS_MONGO_URL=tickets_mongo
       - TICKETS_MONGO_PORT=27017
+      - COOKIE_KEY_1=key_1
+      - COOKIE_KEY_2=key_2
+      - JWT_KEY=jwt_key
+      - JWT_EXPIRATION_TIME=30
+      - NATS_CLUSTER_ID=ticketing
+      - NATS_URL=http://nats
+      - NATS_PORT=4222
+      - NATS_CLIENT_ID=
+  orders:
+    depends_on:
+      - orders_mongo
+      - nats
+    build:
+      context: ./orders
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./orders:/app
+    environment:
+      - NODE_ENV=development
+      - ORDERS_PORT=3000
+      - ORDERS_MONGO_URL=orders_mongo
+      - ORDERS_MONGO_PORT=27017
+      - COOKIE_KEY_1=key_1
+      - COOKIE_KEY_2=key_2
       - JWT_KEY=jwt_key
       - JWT_EXPIRATION_TIME=30
       - NATS_CLUSTER_ID=ticketing
@@ -75,13 +98,18 @@ services:
     image: "mongo:latest"
   tickets_mongo:
     image: "mongo:latest"
+  orders_mongo:
+    image: "mongo:latest"
   nginx:
     restart: always
     depends_on:
       - client
       - auth
       - auth_mongo
+      - tickets
       - tickets_mongo
+      - orders
+      - orders_mongo
       - nats
     build:
       context: ./nginx
