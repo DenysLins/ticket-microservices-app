@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 
+export const isValidId = (id: string) => {
+  return mongoose.Types.ObjectId.isValid(id);
+};
+
 interface TicketAttrs {
   title: string;
   price: number;
@@ -25,6 +29,7 @@ const ticketSchema = new mongoose.Schema<TicketDoc, TicketModel>(
     price: {
       type: Number,
       required: true,
+      min: 0,
     },
     userId: {
       type: String,
