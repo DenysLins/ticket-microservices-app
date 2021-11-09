@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import { randomBytes } from "crypto";
 import { app } from "./app";
 import { natsWrapper } from "./nats-wrapper";
+import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
+import { TicketUpdatedListener } from "./events/listeners/ticket-updated-listener";
 
 const ORDERS_PORT = process.env.ORDERS_PORT || 3000;
 const ORDERS_MONGO_URL = process.env.ORDERS_MONGO_URL || "localhost";
@@ -29,6 +31,9 @@ const start = async () => {
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
 
+    new TicketCreatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen();
+
     await mongoose.connect(
       `mongodb://${ORDERS_MONGO_URL}:${ORDERS_MONGO_PORT}/orders`,
       {
@@ -42,7 +47,7 @@ const start = async () => {
     );
 
     app.listen(ORDERS_PORT, () => {
-      console.log(`Auth listening on port ${ORDERS_PORT}.`);
+      console.log(`Orders listening on port ${ORDERS_PORT}.`);
     });
   } catch (error) {
     console.error(error);
