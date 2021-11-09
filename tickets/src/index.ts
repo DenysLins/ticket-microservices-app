@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 import { randomBytes } from "crypto";
 import { app } from "./app";
 import { natsWrapper } from "./nats-wrapper";
@@ -42,7 +43,7 @@ const start = async () => {
     );
 
     app.listen(TICKETS_PORT, () => {
-      console.log(`Auth listening on port ${TICKETS_PORT}.`);
+      console.log(`Tickets listening on port ${TICKETS_PORT}.`);
     });
   } catch (error) {
     console.error(error);
