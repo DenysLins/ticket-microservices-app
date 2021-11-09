@@ -24,6 +24,7 @@ services:
       - "-hbf"
       - "2"
       - "-SD"
+      - "-D"
       - "-cid"
       - "ticketing"
     ports:
@@ -47,7 +48,7 @@ services:
       - COOKIE_KEY_1=key_1
       - COOKIE_KEY_2=key_2
       - JWT_KEY=jwt_key
-      - JWT_EXPIRATION_TIME=30
+      - JWT_EXPIRATION_TIME=300
   tickets:
     depends_on:
       # - tickets_mongo
@@ -67,7 +68,7 @@ services:
       - COOKIE_KEY_1=key_1
       - COOKIE_KEY_2=key_2
       - JWT_KEY=jwt_key
-      - JWT_EXPIRATION_TIME=30
+      - JWT_EXPIRATION_TIME=300
       - NATS_CLUSTER_ID=ticketing
       - NATS_URL=nats
       - NATS_PORT=4222
@@ -91,7 +92,7 @@ services:
       - COOKIE_KEY_1=key_1
       - COOKIE_KEY_2=key_2
       - JWT_KEY=jwt_key
-      - JWT_EXPIRATION_TIME=30
+      - JWT_EXPIRATION_TIME=300
       - NATS_CLUSTER_ID=ticketing
       - NATS_URL=nats
       - NATS_PORT=4222
